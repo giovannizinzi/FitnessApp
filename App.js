@@ -14,7 +14,7 @@ const headerImage = require('./assets/images/header.jpg');
 const notification = require('./assets/images/Notification.png');
 const banner = require('./assets/images/BG.png');
 const fire = require('./assets/images/fire.png');
-const model = require('./assets/images/model.png');
+const model = require('./assets/images/soldier.png');
 const couple = require('./assets/images/couple.jpg');
 const cycle = require('./assets/images/cycle.png');
 const yoga = require('./assets/images/yoga.png');
@@ -322,17 +322,9 @@ const Banner = () => (
     <ImageBackground style={styles.banner} source={banner}>
       <View style={styles.bannerContainer}>
         <View style={styles.rowLabel}>
-          <View style={styles.fireContainer}>
-            <Image
-              source={fire}
-              resizeMode="contain"
-              style={styles.fireImage}
-            />
-          </View>
-          <Text style={styles.offer}>limited offer</Text>
         </View>
-        <OfferText>30% Discount</OfferText>
-        <OfferText>Flash Sales</OfferText>
+        <OfferText>Check your BMI and BF%</OfferText>
+        <OfferText2>Compete against other soldiers</OfferText2>
       </View>
     </ImageBackground>
     <Image source={model} style={styles.model} resizeMode="contain" />
@@ -343,15 +335,21 @@ const OfferText = ({children}) => (
   <Text style={styles.offerText}>{children}</Text>
 );
 
+const OfferText2 = ({children}) => (
+  <Text style={styles.offerText2}>{children}</Text>
+);
+
 const ImageContainer = ({image, height = '100%', width = '100%'}) => (
   <View style={styles.imageContainer}>
     <Image source={image} style={[{height, width}]} />
   </View>
 );
+
+var options = { hour12: false };
 const HeaderTitle = () => (
   <View style={styles.title}>
-    <Text style={styles.bigTitle}>Hi, Jane</Text>
-    <Text style={styles.smallTitle}>Aug 12, 2021</Text>
+    <Text style={styles.bigTitle}>Hey, Gio</Text>
+    <Text style={styles.smallTitle}>{new Date().toLocaleDateString('en-US', options) + ''}</Text>
   </View>
 );
 
@@ -396,8 +394,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   screen: {margin: '3%'},
-  offer: {color: 'white', fontFamily: 'Poppins-Regular', fontSize: 10},
+  offer: {color: 'white', fontFamily: 'Poppins-Regular', fontSize: 16},
   offerText: {color: 'white', fontSize: 16, fontFamily: 'Poppins-Regular'},
+  offerText2: {color: 'white', fontSize: 12, fontFamily: 'Poppins-Regular'},
 
   rowLabel: {
     flexDirection: 'row',
