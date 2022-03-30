@@ -95,15 +95,15 @@ const BottomTab = () => (
       style={{
         position: 'absolute',
         left: '45%',
-        top: -5,
+        top: -20,
         backgroundColor: '#f0f0f0',
         padding: 8,
         borderRadius: 20,
       }}
     />
     <BottomButton />
-    <BottomButton image={calendar} />
-    <BottomButton image={profile} />
+    <BottomButton image={calendar} title="progress" />
+    <BottomButton image={profile} title="profile"/>
   </View>
 );
 
