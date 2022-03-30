@@ -1,5 +1,7 @@
 import React from 'react';
 import {
+  Alert,
+  Button,
   Image,
   ImageBackground,
   SafeAreaView,
@@ -8,6 +10,7 @@ import {
   Text,
   View,
 } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 import * as Progress from 'react-native-progress';
 const headerImage = require('./assets/images/header.jpg');
@@ -38,10 +41,13 @@ const App = () => {
           <Banner />
         </View>
         <View style={{marginHorizontal: '3%'}}>
-          <Label>Your Activities</Label>
+          <Label>Recommended Activities</Label>
           <View style={{flexDirection: 'row'}}>
             {data.map((item, index) => (
-              <Card data={item} index={index} />
+              <Card data={item} index={index} onPress={() => {
+    alert('You tapped the button!');
+  }}
+  />
             ))}
           </View>
           <View
@@ -89,7 +95,13 @@ const BottomTab = () => (
       alignItems: 'center',
     }}>
     <BottomButton image={home} title="home" />
-    <BottomButton image={heart} title="activities" />
+    <BottomButton image={heart} title="activities" onPress={() => console.log('lelod')}/>
+    <Button
+  onPress={() => {
+    alert('You tapped the button!');
+  }}
+  title="Press Me"
+/>
     <BottomButton
       image={plus}
       style={{
@@ -107,7 +119,7 @@ const BottomTab = () => (
   </View>
 );
 
-const BottomButton = ({image, style, imageStyle, title}) => (
+const BottomButton = ({image, style, imageStyle, title, onPress}) => (
   <>
     <View
       style={[
@@ -266,7 +278,7 @@ const Card = ({data, index}) => {
           style={{
             shadowColor: 'grey',
             shadowOffset: {width: 2, height: 2},
-            shadowOpacity: 0.1,
+            shadowOpacity: 0.5,
             shadowRadius: 1,
           }}
           textStyle={{
@@ -348,7 +360,7 @@ const ImageContainer = ({image, height = '100%', width = '100%'}) => (
 var options = { hour12: false };
 const HeaderTitle = () => (
   <View style={styles.title}>
-    <Text style={styles.bigTitle}>Hey, Gio</Text>
+    <Text style={styles.bigTitle}>Hey, Giovanni</Text>
     <Text style={styles.smallTitle}>{new Date().toLocaleDateString('en-US', options) + ''}</Text>
   </View>
 );
@@ -363,7 +375,7 @@ const styles = StyleSheet.create({
   },
   title: {paddingHorizontal: 10, flex: 1, justifyContent: 'center'},
   bigTitle: {fontSize: 16, fontFamily: 'Poppins-Medium'},
-  smallTitle: {fontSize: 10, fontFamily: 'Poppins-Regular', opacity: 0.6},
+  smallTitle: {fontSize: 10, fontFamily: 'Poppins-Regular', opacity: 0.8},
   image: {height: '100%', width: '100%'},
   fireImage: {height: 15, width: 15, alignSelf: 'center', margin: 5},
   banner: {
@@ -396,7 +408,7 @@ const styles = StyleSheet.create({
   screen: {margin: '3%'},
   offer: {color: 'white', fontFamily: 'Poppins-Regular', fontSize: 16},
   offerText: {color: 'white', fontSize: 16, fontFamily: 'Poppins-Regular'},
-  offerText2: {color: 'white', fontSize: 12, fontFamily: 'Poppins-Regular'},
+  offerText2: {color: 'white', fontSize: 10, fontFamily: 'Poppins-Regular'},
 
   rowLabel: {
     flexDirection: 'row',
