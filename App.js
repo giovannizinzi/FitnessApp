@@ -13,6 +13,9 @@ import {
 import { NavigationContainer } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 import * as Progress from 'react-native-progress';
+import Card from './components/common/card/Card.js';
+import Header from './components/home/Header.js';
+import styles from './components/home/headerstyle.js';
 const headerImage = require('./assets/images/header.jpg');
 const notification = require('./assets/images/Notification.png');
 const banner = require('./assets/images/BG.png');
@@ -242,90 +245,6 @@ const VideoPlay = () => (
   </View>
 );
 
-const Card = ({data, index}) => {
-  return (
-    <View
-      style={{
-        flex: 1,
-        height: index === 1 ? 180 : 150,
-        padding: 10,
-        alignSelf: 'center',
-        backgroundColor: data.color,
-        justifyContent: 'space-between',
-        marginHorizontal: 8,
-        borderRadius: 10,
-        shadowColor: 'lightgrey',
-        shadowOffset: {width: -5, height: 5},
-        shadowOpacity: 0.5,
-        shadowRadius: 2,
-      }}>
-      <Image source={data.image} style={{height: 25, width: 25}} />
-      <View style={{alignSelf: 'center', margin: 5}}>
-        <Progress.Circle
-          size={50}
-          progress={data.status / 100}
-          showsText
-          unfilledColor="#ededed"
-          borderColor="#ededed"
-          color={data.darkColor}
-          direction="counter-clockwise"
-          fill="white"
-          strokeCap="round"
-          thickness={5}
-          style={{
-            shadowColor: 'grey',
-            shadowOffset: {width: 2, height: 2},
-            shadowOpacity: 0.5,
-            shadowRadius: 1,
-          }}
-          textStyle={{
-            fontSize: 16,
-            fontFamily: 'Poppins-Bold',
-            fontWeight: 'bold',
-          }}
-        />
-      </View>
-      <View>
-        <Text style={{fontSize: 10, fontFamily: 'Poppins-Light'}}>
-          {'Day     1'}
-        </Text>
-        <Text style={{fontSize: 10, fontFamily: 'Poppins-Light'}}>
-          {'Time   20 min'}
-        </Text>
-      </View>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}>
-        <Text style={{fontFamily: 'Poppins-Regular'}}>{data.name}</Text>
-        <View
-          style={{
-            backgroundColor: data.lightColor,
-            padding: 2,
-            borderRadius: 10,
-          }}>
-          <Image
-            source={next}
-            style={{
-              height: 12,
-              width: 12,
-              resizeMode: 'contain',
-            }}
-          />
-        </View>
-      </View>
-    </View>
-  );
-};
-const Header = () => (
-  <View style={styles.header}>
-    <ImageContainer image={headerImage} />
-    <HeaderTitle />
-    <ImageContainer image={notification} height={'50%'} width={'50%'} />
-  </View>
-);
 const Banner = () => (
   <>
     <ImageBackground style={styles.banner} source={banner}>
@@ -348,74 +267,8 @@ const OfferText2 = ({children}) => (
   <Text style={styles.offerText2}>{children}</Text>
 );
 
-const ImageContainer = ({image, height = '100%', width = '100%'}) => (
-  <View style={styles.imageContainer}>
-    <Image source={image} style={[{height, width}]} />
-  </View>
-);
-
-var options = { hour12: false };
-const HeaderTitle = () => (
-  <View style={styles.title}>
-    <Text style={styles.bigTitle}>Hey, Giovanni</Text>
-    <Text style={styles.smallTitle}>{new Date().toLocaleDateString('en-US', options) + ''}</Text>
-  </View>
-);
-
 const Label = ({children}) => <Text style={styles.label}>{children}</Text>;
-const styles = StyleSheet.create({
-  container: {flex: 1},
-  header: {
-    paddingHorizontal: 5,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  title: {paddingHorizontal: 10, flex: 1, justifyContent: 'center'},
-  bigTitle: {fontSize: 16, fontFamily: 'Poppins-Medium'},
-  smallTitle: {fontSize: 10, fontFamily: 'Poppins-Regular', opacity: 0.8},
-  image: {height: '100%', width: '100%'},
-  fireImage: {height: 15, width: 15, alignSelf: 'center', margin: 5},
-  banner: {
-    marginTop: 20,
-    padding: 30,
-    resizeMode: 'contain',
-    borderRadius: 20,
-    overflow: 'hidden',
-    flexDirection: 'row',
-  },
-  bannerContainer: {flex: 1},
-  label: {fontFamily: 'Poppins-Medium', fontSize: 20, marginVertical: 10},
-  model: {
-    position: 'absolute',
-    right: 0,
-    bottom: 0,
-    zIndex: 10,
-    height: '75%',
-    width: '50%',
-    transform: [{rotateY: '180deg'}],
-  },
-  imageContainer: {
-    height: 50,
-    width: 50,
-    borderRadius: 25,
-    overflow: 'hidden',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  screen: {margin: '3%'},
-  offer: {color: 'white', fontFamily: 'Poppins-Regular', fontSize: 16},
-  offerText: {color: 'white', fontSize: 16, fontFamily: 'Poppins-Regular'},
-  offerText2: {color: 'white', fontSize: 10, fontFamily: 'Poppins-Regular'},
 
-  rowLabel: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  fireContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
 
 const data = [
   {
