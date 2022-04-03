@@ -44,10 +44,7 @@ const App = () => {
           <Label>Recommended Activities</Label>
           <View style={{flexDirection: 'row'}}>
             {data.map((item, index) => (
-              <Card data={item} index={index} onPress={() => {
-    alert('You tapped the button!');
-  }}
-  />
+              <Card data={item} index={index} />
             ))}
           </View>
           <View
