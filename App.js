@@ -11,7 +11,8 @@ import {
   View,
 } from 'react-native';
 
-import Home from './pages/exercise/Home.js';
+import Home from './screens/exercise/Home.js';
+import Details from './screens/exercise/Details.js';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
@@ -21,7 +22,6 @@ import Card from './components/common/card/Card.js';
 import Banner from './components/common/banner/Banner.js';
 import Header from './components/home/Header.js';
 import styles from './components/home/headerstyle.js';
-import Details from './pages/exercise/Details.js';
 const headerImage = require('./assets/images/header.jpg');
 const notification = require('./assets/images/Notification.png');
 const banner = require('./assets/images/BG.png');
@@ -50,19 +50,14 @@ const theme = {
   }
 }
 
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-    </View>
-  );
-}
-
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Navigator screenOptions={{
+          headerShown: false,
+        }}>
+        <Stack.Screen name="Exercises" component={Home} />
+        <Stack.Screen name="Details" component={Details} />
       </Stack.Navigator>
     </NavigationContainer>
   );
