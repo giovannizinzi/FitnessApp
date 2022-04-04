@@ -54,16 +54,37 @@ const ImageCmp = ({ imgUrl, index }) => {
   );
 };
 
-export const People = () => {
-  return (
-    <View style={{ flexDirection: "row" }}>
-      {[assets.person02, assets.person04, assets.person03].map(
-        (imgUrl, index) => (
-          <ImageCmp imgUrl={imgUrl} index={index} key={`People-${index}`} />
-        )
-      )}
-    </View>
+//Wow this is hacky lol
+export const People = ({ indexAsset }) => {
+
+    if(indexAsset == 1) {
+      return (
+        <View>
+        </View>
+      );
+    }
+    else if (indexAsset == 3) {
+      return (
+        <View style={{ flexDirection: "row" }}>
+          {[assets.person02].map(
+            (imgUrl, index) => (
+              <ImageCmp imgUrl={imgUrl} index={index} key={`People-${index}`} />
+            )
+          )}
+        </View>
   );
+    }
+    else {
+      return (
+        <View style={{ flexDirection: "row" }}>
+        {[assets.person03, assets.person04, assets.person02].map(
+            (imgUrl, index) => (
+              <ImageCmp imgUrl={imgUrl} index={index} key={`People-${index}`} />
+            )
+          )}
+        </View>
+  );
+  }
 };
 
 export const EndDate = () => {
@@ -94,7 +115,7 @@ export const EndDate = () => {
   );
 };
 
-export const SubInfo = () => {
+export const SubInfo = ({ index }) => {
   return (
     <View
       style={{
@@ -105,7 +126,7 @@ export const SubInfo = () => {
         justifyContent: "space-between",
       }}
     >
-      <People />
+      <People indexAsset={index}/>
       <EndDate />
     </View>
   );

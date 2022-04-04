@@ -11,7 +11,7 @@ const Banner = () => (
         <View style={styles.bannerContainer}>
           <View style={styles.rowLabel}>
           </View>
-          <OfferText>ABCP Notification: Drink Water! </OfferText>
+          <OfferText>Notification: APFT in 14 days! </OfferText>
         </View>
       </ImageBackground>
       <Image source={model} style={styles.model} resizeMode="contain" />

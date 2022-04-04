@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Alert,
   Button,
@@ -9,10 +9,13 @@ import {
   StyleSheet,
   Text,
   View,
+  TouchableOpacity,
 } from 'react-native';
 
 import Home from './screens/exercise/Home.js';
 import Details from './screens/exercise/Details.js';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useNavigation } from "@react-navigation/native";
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
@@ -22,6 +25,7 @@ import Card from './components/common/card/Card.js';
 import Banner from './components/common/banner/Banner.js';
 import Header from './components/home/Header.js';
 import styles from './components/home/headerstyle.js';
+import { RectButton, CircleButton } from "./components/exercise/Button.js";
 const headerImage = require('./assets/images/header.jpg');
 const notification = require('./assets/images/Notification.png');
 const banner = require('./assets/images/BG.png');
@@ -40,7 +44,8 @@ const calendar = require('./assets/images/Calender.png');
 const profile = require('./assets/images/User.png');
 const plus = require('./assets/images/Plus.png');
 
-const Stack = createNativeStackNavigator()
+const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 const theme = {
   ...DefaultTheme,
@@ -50,59 +55,101 @@ const theme = {
   }
 }
 
+// function BottomTabBar() {
+//   return (
+//     <Tab.Navigator
+//     screenOptions={{
+//       showLabel: false,
+//       style : {
+//         position: 'absolute',
+//         bottom: 25,
+//         left: 20,
+//         right: 20,
+//         elevation: 0,
+//         borderRadius: 15,
+//         height: 50,
+//       }
+//     }}>
+//       <Tab.Screen name="Exercises" component={Home2} />
+//       <Tab.Screen name="ExercisesAndDetails" component={ExerciseAndDetails} />
+
+//     </Tab.Navigator>
+//   );
+// }
+
 function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{
-          headerShown: false,
-        }}>
+          headerShown: false
+        }}
+        initialRouteName="Home2">
+        <Stack.Screen name="Home2" component={Home2} />
         <Stack.Screen name="Exercises" component={Home} />
-        <Stack.Screen name="Details" component={Details} />
-      </Stack.Navigator>
+        <Stack.Screen name="Details" component={Details} />     
+         </Stack.Navigator>
     </NavigationContainer>
+  );
+}
+
+function HomeScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Go to Details"
+        onPress={() => navigation.navigate('Exercises')}
+      />
+    </View>
   );
 }
 
 export default App;
 
+const Home2 = () => {
+  const [nextPage, setNextPage] = useState(false);
 
-// const Home = () => (
-//  <>
-//       <SafeAreaView style={styles.container}>
-//         <View style={styles.screen}>
-//           <Header />
-//           <Banner />
-//         </View>
-//         <View style={{marginHorizontal: '3%'}}>
-//           <Label>Progress Towards Army Standards</Label>
-//           <View style={{flexDirection: 'row'}}>
-//             {data.map((item, index) => (
-//               <Card data={item} index={index} />
-//             ))}
-//           </View>
-//           <View
-//             style={{
-//               flexDirection: 'row',
-//               justifyContent: 'space-between',
-//               alignItems: 'center',
-//             }}>
-//             <Label>Workout Videos</Label>
-//             <Text style={{opacity: 0.5, fontSize: 12,}}>
-//               View All
-//             </Text>
-//           </View>
-//           <View style={{flexDirection: 'row'}}>
-//             {data.map((item, index) => (
-//               <VideoPlay index={index} />
-//             ))}
-//           </View>
-//         </View>
-//       </SafeAreaView>
-//       <BottomTab />
-//     </> 
-//   );
+  return (
+    <>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.screen}>
+          <Header />
+          <Banner />
+        </View>
+        <View style={{marginHorizontal: '3%'}}>
+          <Label>Progress Towards Army Standards</Label>
+          <View style={{flexDirection: 'row'}}>
+            {data.map((item, index) => (
+              <Card data={item} index={index} key={`Card-${index}`} />
+            ))}
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}>
+            <Label>Workout Videos</Label>
+            <Text style={{opacity: 0.5, fontSize: 12,}}>
+              View All
+            </Text>
+          </View>
+          <View style={{flexDirection: 'row'}}>
+            {data.map((item, index) => (
+              <VideoPlay index={index} />
+            ))}
+          </View>
+        </View>
+      </SafeAreaView>
+      <BottomTab/>
+      </>
+  );
+}
 
-const BottomTab = () => (
+const BottomTab = ({nextPage}) => {
+  const navigation = useNavigation();
+
+return (
   <View
     style={{
       position: 'absolute',
@@ -116,32 +163,27 @@ const BottomTab = () => (
       flexDirection: 'row',
       alignItems: 'center',
     }}>
-    <BottomButton image={home} title="home" />
-    <BottomButton image={heart} title="activities" onPress={() => console.log('lelod')}/>
-    <Button
-  onPress={() => {
-    alert('You tapped the button!');
-  }}
-  title="Press Me"
-/>
+    <BottomButton image={home} title="Home" />
+    <BottomButton image={heart} title="Exercise" onPress={() => navigation.navigate('Exercises')}/>
     <BottomButton
       image={plus}
       style={{
         position: 'absolute',
         left: '45%',
         top: -20,
-        backgroundColor: '#f0f0f0',
+        backgroundColor: '#EDEDED',
         padding: 8,
         borderRadius: 20,
       }}
     />
     <BottomButton />
-    <BottomButton image={calendar} title="progress" />
-    <BottomButton image={profile} title="profile"/>
+    <BottomButton image={calendar} title="Progress" />
+    <BottomButton image={profile} title="Profile"/>
   </View>
 );
+};
 
-const BottomButton = ({image, style, imageStyle, title, onPress}) => (
+const BottomButton = ({image, style, imageStyle, title, onPress, ...props }) => (
   <>
     <View
       style={[
@@ -162,6 +204,18 @@ const BottomButton = ({image, style, imageStyle, title, onPress}) => (
           imageStyle,
         ]}
       />
+      <TouchableOpacity
+      style={{
+        width: 40,
+        height: 40,
+        position: "absolute",
+        alignItems: "center",
+        justifyContent: "center",
+        ...props 
+      }}
+      onPress={onPress}
+    >
+    </TouchableOpacity>
       <Text>{title}</Text>
     </View>
     {image === home && (
@@ -270,7 +324,7 @@ const Label = ({children}) => <Text style={styles.label}>{children}</Text>;
 // This is data for the home screen!
 const data = [
   {
-    name: 'Cycling',
+    name: 'Weight',
     status: 85,
     image: cycle,
     lightColor: '#f8e4d9',
@@ -278,7 +332,7 @@ const data = [
     darkColor: '#fac5a4',
   },
   {
-    name: 'Walking',
+    name: 'Activity',
     status: 25,
     image: walk,
     lightColor: '#d7f0f7',
@@ -286,7 +340,7 @@ const data = [
     darkColor: '#aceafc',
   },
   {
-    name: 'Yoga',
+    name: 'BodyFat',
     status: 85,
     image: yoga,
     lightColor: '#dad5fe',

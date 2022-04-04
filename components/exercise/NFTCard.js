@@ -38,7 +38,7 @@ const NFTCard = ({ data }) => {
 
       </View>
 
-      <SubInfo />
+      <SubInfo index={data.id}/>
 
       <View style={{ width: "100%", padding: SIZES.font }}>
         <NFTTitle

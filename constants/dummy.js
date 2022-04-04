@@ -2,7 +2,7 @@ import assets from "./assets";
 
 const NFTData = [
   {
-    id: "NFT-01",
+    id: "1",
     name: "Stationary Bike - Interval Training",
     creator: "Putri Intan",
     price: 220,
@@ -20,7 +20,7 @@ const NFTData = [
     ],
   },
   {
-    id: "NFT-02",
+    id: "2",
     name: "Upper Body Circuit",
     price: 80,
     description:
@@ -54,8 +54,8 @@ const NFTData = [
     ],
   },
   {
-    id: "NFT-03",
-    name: "Ab circuit",
+    id: "3",
+    name: "Ab Workout - Calisthenics",
     creator: "Hauk",
     price: 75,
     description:
