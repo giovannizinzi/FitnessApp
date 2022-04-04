@@ -41,18 +41,9 @@ const Card = ({data, index}) => {
             }}
             textStyle={{
               fontSize: 16,
-              fontFamily: 'Poppins-Bold',
               fontWeight: 'bold',
             }}
           />
-        </View>
-        <View>
-          <Text style={{fontSize: 10, fontFamily: 'Poppins-Light'}}>
-            {'Day     1'}
-          </Text>
-          <Text style={{fontSize: 10, fontFamily: 'Poppins-Light'}}>
-            {'Time   20 min'}
-          </Text>
         </View>
         <View
           style={{
@@ -60,22 +51,7 @@ const Card = ({data, index}) => {
             justifyContent: 'space-between',
             alignItems: 'center',
           }}>
-          <Text style={{fontFamily: 'Poppins-Regular'}}>{data.name}</Text>
-          <View
-            style={{
-              backgroundColor: data.lightColor,
-              padding: 2,
-              borderRadius: 10,
-            }}>
-            <Image
-              source={next}
-              style={{
-                height: 12,
-                width: 12,
-                resizeMode: 'contain',
-              }}
-            />
-          </View>
+          <Text>{data.name}</Text>
         </View>
       </View>
     );

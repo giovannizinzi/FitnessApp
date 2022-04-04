@@ -10,17 +10,22 @@ import {
   Text,
   View,
 } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+
+import Home from './pages/exercise/Home.js';
+
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 import * as Progress from 'react-native-progress';
 import Card from './components/common/card/Card.js';
+import Banner from './components/common/banner/Banner.js';
 import Header from './components/home/Header.js';
 import styles from './components/home/headerstyle.js';
+import Details from './pages/exercise/Details.js';
 const headerImage = require('./assets/images/header.jpg');
 const notification = require('./assets/images/Notification.png');
 const banner = require('./assets/images/BG.png');
 const fire = require('./assets/images/fire.png');
-const model = require('./assets/images/soldier.png');
 const couple = require('./assets/images/couple.jpg');
 const cycle = require('./assets/images/cycle.png');
 const yoga = require('./assets/images/yoga.png');
@@ -35,50 +40,72 @@ const calendar = require('./assets/images/Calender.png');
 const profile = require('./assets/images/User.png');
 const plus = require('./assets/images/Plus.png');
 
-const App = () => {
+const Stack = createNativeStackNavigator()
+
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: "transparent"
+  }
+}
+
+function HomeScreen() {
   return (
-    <>
-      <SafeAreaView style={styles.container}>
-        <View style={styles.screen}>
-          <Header />
-          <Banner />
-        </View>
-        <View style={{marginHorizontal: '3%'}}>
-          <Label>Recommended Activities</Label>
-          <View style={{flexDirection: 'row'}}>
-            {data.map((item, index) => (
-              <Card data={item} index={index} />
-            ))}
-          </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}>
-            <Label>Workout Videos</Label>
-            <Text
-              style={{
-                fontFamily: 'Poppins-Regular',
-                opacity: 0.5,
-                fontSize: 12,
-              }}>
-              View All
-            </Text>
-          </View>
-          <View style={{flexDirection: 'row'}}>
-            {data.map((item, index) => (
-              <VideoPlay index={index} />
-            ))}
-          </View>
-        </View>
-      </SafeAreaView>
-      <BottomTab />
-    </>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+    </View>
   );
-};
+}
+
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
 
 export default App;
+
+
+// const Home = () => (
+//  <>
+//       <SafeAreaView style={styles.container}>
+//         <View style={styles.screen}>
+//           <Header />
+//           <Banner />
+//         </View>
+//         <View style={{marginHorizontal: '3%'}}>
+//           <Label>Progress Towards Army Standards</Label>
+//           <View style={{flexDirection: 'row'}}>
+//             {data.map((item, index) => (
+//               <Card data={item} index={index} />
+//             ))}
+//           </View>
+//           <View
+//             style={{
+//               flexDirection: 'row',
+//               justifyContent: 'space-between',
+//               alignItems: 'center',
+//             }}>
+//             <Label>Workout Videos</Label>
+//             <Text style={{opacity: 0.5, fontSize: 12,}}>
+//               View All
+//             </Text>
+//           </View>
+//           <View style={{flexDirection: 'row'}}>
+//             {data.map((item, index) => (
+//               <VideoPlay index={index} />
+//             ))}
+//           </View>
+//         </View>
+//       </SafeAreaView>
+//       <BottomTab />
+//     </> 
+//   );
 
 const BottomTab = () => (
   <View
@@ -189,7 +216,6 @@ const VideoPlay = () => (
           position: 'absolute',
           bottom: 5,
           left: 10,
-          fontFamily: 'Poppins-Regular',
           color: '#fff',
         }}>
         Transformation
@@ -224,17 +250,16 @@ const VideoPlay = () => (
         }}>
         <Image source={play} style={{height: 10, width: 10}} />
       </View>
-      <Text style={{fontFamily: 'Poppins-Regular'}}>
+      <Text>
         2 Hour Bulking Trainer
       </Text>
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-        <Text style={{fontFamily: 'Poppins-Regular', fontSize: 12}}>
+        <Text>
           <Image source={book} style={{height: 15, width: 15}} />
           {'   Beginner'}
         </Text>
         <Text
           style={{
-            fontFamily: 'Poppins-Regular',
             fontSize: 12,
             color: '#8860a2',
           }}>
@@ -245,31 +270,9 @@ const VideoPlay = () => (
   </View>
 );
 
-const Banner = () => (
-  <>
-    <ImageBackground style={styles.banner} source={banner}>
-      <View style={styles.bannerContainer}>
-        <View style={styles.rowLabel}>
-        </View>
-        <OfferText>Check your BMI and BF%</OfferText>
-        <OfferText2>Compete against other soldiers</OfferText2>
-      </View>
-    </ImageBackground>
-    <Image source={model} style={styles.model} resizeMode="contain" />
-  </>
-);
-
-const OfferText = ({children}) => (
-  <Text style={styles.offerText}>{children}</Text>
-);
-
-const OfferText2 = ({children}) => (
-  <Text style={styles.offerText2}>{children}</Text>
-);
-
 const Label = ({children}) => <Text style={styles.label}>{children}</Text>;
 
-
+// This is data for the home screen!
 const data = [
   {
     name: 'Cycling',

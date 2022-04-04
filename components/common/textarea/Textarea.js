@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TextInput, View } from 'react-native';
 import PropTypes from 'prop-types';
-import styles from './textareastyle.js';
+import styles from './textarea-style.js';
 
 class TextArea extends Component {
   state = {
